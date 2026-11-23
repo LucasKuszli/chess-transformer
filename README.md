@@ -6,6 +6,8 @@ A small encoder-only transformer that looks at a chess position and predicts Sto
   <img src="evaluation/d128_L5/dynamic_piece_plane/pred_vs_target.png" width="420" alt="Predicted vs Stockfish win probability on the test set">
 </p>
 
+**[Read the report (PDF)](docs/report.pdf)**, *Exploring positional chess encodings for transformer-based learning*.
+
 ## What the project explores
 
 How much does the way you **encode the board** matter? Three encoders of increasing richness were compared, each trained with three seeds on disjoint data splits.
@@ -16,7 +18,7 @@ How much does the way you **encode the board** matter? Three encoders of increas
 | `dynamic_piece_plane` | 31 planes. Adds attack and defence maps, reachability, pins, check | **0.960** | **0.045** | **90.2%** | **~1,270** |
 | `full_piece_plane` | 37 planes. Adds pawn structure (doubled, isolated, passed) | not run | not run | not run | ~1,240 |
 
-Values are means over three seeds. Playing strength was estimated from 140 games per model against Stockfish limited to 1,320 to 2,500 Elo, fitted with the standard Elo model.
+Values are means over three seeds on a shared test set of 62,829 positions. Playing strength was estimated from 140 games per model against Stockfish limited to 1,320 to 2,500 Elo, fitted with the standard Elo model.
 
 **Takeaway.** The plain piece encoding already predicts evaluations well, yet it plays very poorly. Adding tactical information (what attacks and defends what) improves prediction a little and playing strength a lot. Pawn-structure planes on top of that did not help further.
 
